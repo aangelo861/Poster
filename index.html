@@ -78,9 +78,11 @@
 
         /* Hero section */
         .hero {
-            background: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 100%);
+            background: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 50%, var(--nhs-purple) 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
             color: white;
-            padding: 60px 0;
+            padding: 80px 0;
             text-align: center;
         }
 
@@ -102,18 +104,38 @@
             display: inline-block;
             background-color: white;
             color: var(--nhs-blue);
-            padding: 12px 30px;
+            padding: 14px 36px;
             border-radius: 30px;
             font-weight: 600;
             text-decoration: none;
-            transition: transform 0.3s, box-shadow 0.3s;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
             animation: fadeInUp var(--animation-duration) ease-out 0.4s forwards;
         }
 
         .hero-cta:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+            color: white;
+        }
+
+        .hero-cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--nhs-blue);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: -1;
+        }
+
+        .hero-cta:hover:before {
+            width: 100%;
         }
 
         /* About section */
@@ -162,17 +184,15 @@
         }
 
         .about-image {
-            border-radius: 10px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            opacity: 0;
-            transform: translateX(20px);
-            transition: opacity 0.6s, transform 0.6s;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .about-image.visible {
-            opacity: 1;
-            transform: translateX(0);
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
         }
 
         .about-image img {
@@ -203,7 +223,7 @@
             border-radius: 10px;
             padding: 30px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             opacity: 0;
             transform: translateY(20px);
         }
@@ -214,21 +234,23 @@
         }
 
         .feature-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,94,184,0.15);
         }
 
         .feature-icon {
-            width: 60px;
-            height: 60px;
-            background-color: var(--nhs-light-blue);
+            animation: float 5s ease-in-out infinite;
+            background: linear-gradient(135deg, var(--nhs-light-blue) 0%, var(--nhs-blue) 100%);
+            width: 70px;
+            height: 70px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
             color: white;
-            font-size: 24px;
+            font-size: 28px;
+            box-shadow: 0 10px 20px rgba(65,182,230,0.3);
         }
 
         .feature-card h3 {
@@ -245,41 +267,38 @@
 
         .gallery-container {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: minmax(250px, auto);
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
             margin-top: 50px;
         }
 
         .gallery-item {
-            border-radius: 10px;
+            aspect-ratio: 9/16;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
             position: relative;
             opacity: 0;
-            transform: scale(0.9);
-            transition: transform 0.4s, opacity 0.4s, box-shadow 0.3s;
+            transform: translateY(30px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .gallery-item.visible {
             opacity: 1;
-            transform: scale(1);
+            transform: translateY(0);
         }
 
         .gallery-item:hover {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-            z-index: 1;
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,94,184,0.25);
         }
 
         .gallery-item img {
             width: 100%;
-            height: auto;
-            object-fit: contain;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            transition: transform 0.5s;
-            background-color: #fff;
-            padding: 5px;
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .gallery-item:hover img {
@@ -291,11 +310,11 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-            padding: 20px;
+            background: linear-gradient(to top, rgba(0,94,184,0.9), transparent);
+            padding: 30px 20px 20px;
             color: white;
             transform: translateY(100%);
-            transition: transform 0.3s;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .gallery-item:hover .gallery-item-overlay {
@@ -312,42 +331,6 @@
             opacity: 0.9;
         }
 
-        /* Gallery item positioning */
-        .gallery-item:nth-child(1) {
-            grid-column: 1 / 5;
-            grid-row: 1 / 3;
-        }
-
-        .gallery-item:nth-child(2) {
-            grid-column: 5 / 9;
-            grid-row: 1 / 2;
-        }
-
-        .gallery-item:nth-child(3) {
-            grid-column: 9 / 13;
-            grid-row: 1 / 2;
-        }
-
-        .gallery-item:nth-child(4) {
-            grid-column: 5 / 7;
-            grid-row: 2 / 3;
-        }
-
-        .gallery-item:nth-child(5) {
-            grid-column: 7 / 9;
-            grid-row: 2 / 3;
-        }
-
-        .gallery-item:nth-child(6) {
-            grid-column: 9 / 11;
-            grid-row: 2 / 3;
-        }
-
-        .gallery-item:nth-child(7) {
-            grid-column: 11 / 13;
-            grid-row: 2 / 3;
-        }
-
         /* Testimonials section */
         .testimonials {
             padding: 80px 0;
@@ -362,10 +345,11 @@
         }
 
         .testimonial-slide {
-            padding: 30px;
+            padding: 40px;
             text-align: center;
             opacity: 0;
-            transition: opacity 0.5s;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
             position: absolute;
             width: 100%;
             top: 0;
@@ -374,39 +358,36 @@
 
         .testimonial-slide.active {
             opacity: 1;
+            transform: translateX(0);
             position: relative;
         }
 
         .testimonial-text {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            margin-bottom: 20px;
+            font-size: 1.3rem;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 30px;
             position: relative;
-            padding: 0 40px;
-        }
-
-        .testimonial-text:before,
-        .testimonial-text:after {
-            content: '"';
-            font-size: 60px;
-            position: absolute;
-            color: rgba(0, 94, 184, 0.2);
-            font-family: Georgia, serif;
-        }
-
-        .testimonial-text:before {
-            top: -20px;
-            left: 0;
-        }
-
-        .testimonial-text:after {
-            bottom: -40px;
-            right: 0;
+            padding: 0 50px;
         }
 
         .testimonial-author {
             font-weight: 600;
             color: var(--nhs-blue);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .testimonial-author:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--nhs-light-blue);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .slider-nav {
@@ -614,7 +595,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(40px);
             }
             to {
                 opacity: 1;
@@ -625,7 +606,7 @@
         @keyframes fadeInLeft {
             from {
                 opacity: 0;
-                transform: translateX(-30px);
+                transform: translateX(-40px);
             }
             to {
                 opacity: 1;
@@ -636,7 +617,7 @@
         @keyframes fadeInRight {
             from {
                 opacity: 0;
-                transform: translateX(30px);
+                transform: translateX(40px);
             }
             to {
                 opacity: 1;
@@ -644,53 +625,46 @@
             }
         }
 
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
         @keyframes pulse {
             0% {
                 transform: scale(1);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             }
             50% {
-                transform: scale(1.05);
+                transform: scale(1.03);
+                box-shadow: 0 15px 30px rgba(0,94,184,0.2);
             }
             100% {
                 transform: scale(1);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
             }
         }
 
         /* Responsive */
         @media (max-width: 992px) {
-            .features-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
             .gallery-container {
-                grid-template-columns: repeat(6, 1fr);
-            }
-            
-            .gallery-item:nth-child(1) {
-                grid-column: 1 / 7;
-                grid-row: auto;
-            }
-            
-            .gallery-item:nth-child(2), 
-            .gallery-item:nth-child(3) {
-                grid-column: 1 / 4;
-                grid-row: auto;
-            }
-            
-            .gallery-item:nth-child(4), 
-            .gallery-item:nth-child(5) {
-                grid-column: 4 / 7;
-                grid-row: auto;
-            }
-            
-            .gallery-item:nth-child(6), 
-            .gallery-item:nth-child(7) {
-                grid-column: 1 / 7;
-                grid-row: auto;
+                grid-template-columns: repeat(2, 1fr);
             }
             
             .contact-content {
@@ -704,17 +678,8 @@
         }
 
         @media (max-width: 768px) {
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .gallery-container {
                 grid-template-columns: 1fr;
-            }
-            
-            .gallery-item:nth-child(n) {
-                grid-column: 1;
-                grid-row: auto;
             }
             
             .privacy-features {
@@ -724,6 +689,35 @@
             .footer-content {
                 grid-template-columns: 1fr;
             }
+        }
+
+        .lead-paragraph {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--nhs-dark-blue);
+        }
+        
+        .key-quote {
+            border-left: 4px solid var(--nhs-blue);
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 1.25rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--nhs-blue);
+        }
+        
+        .research-highlight {
+            background-color: rgba(65, 182, 230, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--nhs-light-blue);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.2rem;
         }
     </style>
 </head>
@@ -755,9 +749,16 @@
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <p>The CNWL Trauma-Informed Approaches mobile application represents a significant advancement in the delivery of mental health resources. Developed in collaboration with mental health professionals from Central and North West London NHS Foundation Trust, this application aligns with the NHS Long Term Plan (2019), which has established a ten-year roadmap for mental health services to become trauma-informed.</p>
-                    <p>The fundamental shift in trauma-informed care moves away from asking "What is wrong with you?" to instead asking "What has happened to you?" This perspective recognizes that trauma experiences are common and require specialized approaches to care.</p>
-                    <p>Trauma-informed approaches acknowledge the relationship between people's life experiences and the development of mental health difficulties. Research has shown that experiencing traumatic and/or adverse life events can place individuals at higher risk of a range of health and social difficulties (WHO, 2014).</p>
+                    <p class="lead-paragraph">The CNWL Trauma-Informed Approaches mobile application represents a significant advancement in the delivery of mental health resources. Developed in collaboration with mental health professionals from Central and North West London NHS Foundation Trust, this application aligns with the NHS Long Term Plan (2019), which has established a ten-year roadmap for mental health services to become trauma-informed.</p>
+                    
+                    <blockquote class="key-quote">
+                        <p>The fundamental shift in trauma-informed care moves away from asking "What is wrong with you?" to instead asking "What has happened to you?"</p>
+                    </blockquote>
+                    
+                    <p>This perspective recognizes that trauma experiences are common and require specialized approaches to care. Trauma-informed approaches acknowledge the relationship between people's life experiences and the development of mental health difficulties.</p>
+                    
+                    <p class="research-highlight">Research has shown that experiencing traumatic and/or adverse life events can place individuals at higher risk of a range of health and social difficulties (WHO, 2014).</p>
+                    
                     <p>The CNWL Trauma-Informed Approaches framework recognizes that in times of distress, people experiencing mental health difficulties often feel unstable, making forward progress challenging. Psychological stabilization—the process of learning and implementing various skills and strategies to manage distress—forms the foundation of the app's therapeutic approach.</p>
                 </div>
                 <div class="about-image">
@@ -832,13 +833,6 @@
                     <div class="gallery-item-overlay">
                         <h4>Meditation Timer</h4>
                         <p>Customizable timer with ambient sounds for mindfulness practice</p>
-                    </div>
-                </div>
-                <div class="gallery-item">
-                    <img src="Journal.png" alt="Mood Journal" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';">
-                    <div class="gallery-item-overlay">
-                        <h4>Mood Journal</h4>
-                        <p>Private tracking of emotional patterns and triggers</p>
                     </div>
                 </div>
                 <div class="gallery-item">
@@ -931,77 +925,8 @@
         </div>
     </section>
 
-    <section class="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Get in Touch</h2>
-            </div>
-            <div class="contact-content">
-                <div class="contact-text">
-                    <p>For more information about the CNWL Trauma-Informed Approaches mobile application or to discuss implementation in your healthcare setting, please get in touch with us.</p>
-                    <p>Our team is committed to supporting the wider adoption of trauma-informed approaches in mental health care through innovative digital solutions.</p>
-                </div>
-                <form class="contact-form" id="contactForm" action="https://formsubmit.co/a.gurusinghe@nhs.net" method="POST">
-                    <input type="hidden" name="_subject" value="CNWL Trauma-Informed App Support Request">
-                    <input type="hidden" name="_next" value="https://yourusername.github.io/repo-name/thank-you.html">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Message</label>
-                        <textarea id="message" name="message" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-btn">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>About</h3>
-                    <ul>
-                        <li><a href="#">Our Mission</a></li>
-                        <li><a href="#">Team</a></li>
-                        <li><a href="#">Partners</a></li>
-                        <li><a href="#">Research</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Resources</h3>
-                    <ul>
-                        <li><a href="#">Download App</a></li>
-                        <li><a href="#">User Guide</a></li>
-                        <li><a href="#">FAQs</a></li>
-                        <li><a href="#">Support</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Terms of Use</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">Accessibility</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Connect</h3>
-                    <ul>
-                        <li><a href="#">Twitter</a></li>
-                        <li><a href="#">LinkedIn</a></li>
-                        <li><a href="#">Facebook</a></li>
-                        <li><a href="#">YouTube</a></li>
-                    </ul>
-                </div>
-            </div>
             <div class="footer-bottom">
                 <p>&copy; 2024 Central and North West London NHS Foundation Trust | Wellbeing for life</p>
             </div>
@@ -1326,7 +1251,7 @@
             @keyframes fadeInUp {
                 from {
                     opacity: 0;
-                    transform: translateY(30px);
+                    transform: translateY(40px);
                 }
                 to {
                     opacity: 1;
@@ -1337,7 +1262,7 @@
             @keyframes fadeInLeft {
                 from {
                     opacity: 0;
-                    transform: translateX(-30px);
+                    transform: translateX(-40px);
                 }
                 to {
                     opacity: 1;
@@ -1348,7 +1273,7 @@
             @keyframes fadeInRight {
                 from {
                     opacity: 0;
-                    transform: translateX(30px);
+                    transform: translateX(40px);
                 }
                 to {
                     opacity: 1;
@@ -1361,12 +1286,12 @@
                     transform: translateY(0);
                 }
                 50% {
-                    transform: translateY(-10px);
+                    transform: translateY(-15px);
                 }
             }
 
             .feature-icon {
-                animation: float 3s ease-in-out infinite;
+                animation: float 5s ease-in-out infinite;
             }
 
             .feature-icon:nth-child(odd) {
@@ -1374,6 +1299,299 @@
             }
         `;
         document.head.appendChild(style);
+
+        // Advanced animations for a more impressive UI
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate hero section elements
+            const heroElements = document.querySelectorAll('.hero h1, .hero p, .hero-cta');
+            heroElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                el.style.transitionDelay = `${0.3 + index * 0.2}s`;
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100);
+            });
+            
+            // Add particle background to hero section
+            const hero = document.querySelector('.hero');
+            const particleContainer = document.createElement('div');
+            particleContainer.className = 'particle-container';
+            particleContainer.style.position = 'absolute';
+            particleContainer.style.top = '0';
+            particleContainer.style.left = '0';
+            particleContainer.style.width = '100%';
+            particleContainer.style.height = '100%';
+            particleContainer.style.overflow = 'hidden';
+            particleContainer.style.zIndex = '1';
+            hero.style.position = 'relative';
+            
+            // Insert the particle container as the first child of hero
+            hero.insertBefore(particleContainer, hero.firstChild);
+            
+            // Create the hero content container to position above particles
+            const heroContentElements = document.querySelector('.hero .container');
+            heroContentElements.style.position = 'relative';
+            heroContentElements.style.zIndex = '2';
+            
+            // Create particles
+            for (let i = 0; i < 50; i++) {
+                createParticle(particleContainer);
+            }
+            
+            // Enhance scroll animations
+            window.addEventListener('scroll', function() {
+                // Parallax effects for different sections
+                const scrollPosition = window.scrollY;
+                const sections = document.querySelectorAll('section');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionMiddle = sectionTop + sectionHeight / 2;
+                    const distanceFromMiddle = scrollPosition - sectionMiddle;
+                    
+                    if (section.classList.contains('about')) {
+                        const aboutImage = section.querySelector('.about-image');
+                        if (aboutImage) {
+                            aboutImage.style.transform = `perspective(1000px) rotateY(${distanceFromMiddle * 0.01}deg) translateZ(${Math.abs(distanceFromMiddle) * 0.05}px)`;
+                        }
+                    }
+                    
+                    if (section.classList.contains('key-features')) {
+                        const featureCards = section.querySelectorAll('.feature-card');
+                        featureCards.forEach((card, index) => {
+                            const delay = index * 0.05;
+                            const translateY = Math.max(-10, Math.min(10, -distanceFromMiddle * 0.02));
+                            card.style.transform = `translateY(${translateY}px)`;
+                            card.style.transitionDelay = `${delay}s`;
+                        });
+                    }
+                });
+                
+                // Animate feature icons with scroll position
+                document.querySelectorAll('.feature-icon').forEach((icon, index) => {
+                    const rotationSpeed = 0.02;
+                    const floatY = Math.sin(scrollPosition / 200 + index) * 8;
+                    const rotation = (scrollPosition * rotationSpeed + index * 30) % 360;
+                    
+                    icon.style.transform = `translateY(${floatY}px) rotate(${rotation * 0.1}deg)`;
+                    
+                    // Apply subtle color shift with scroll
+                    const hue = (180 + scrollPosition * 0.05 + index * 20) % 360;
+                    icon.style.background = `linear-gradient(135deg, hsl(${hue}, 70%, 60%) 0%, hsl(${hue + 40}, 90%, 40%) 100%)`;
+                    icon.style.boxShadow = `0 10px 20px rgba(${Math.sin(hue) * 127 + 128}, ${Math.sin(hue + 120) * 127 + 128}, ${Math.sin(hue + 240) * 127 + 128}, 0.3)`;
+                });
+            });
+            
+            // Add hover effects to the contact form
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                const formGroups = contactForm.querySelectorAll('.form-group');
+                formGroups.forEach(group => {
+                    const input = group.querySelector('input, textarea');
+                    const label = group.querySelector('label');
+                    
+                    if (input && label) {
+                        // Create floating label effect
+                        label.style.position = 'absolute';
+                        label.style.top = '12px';
+                        label.style.left = '12px';
+                        label.style.color = '#aaa';
+                        label.style.transition = 'all 0.3s ease';
+                        label.style.pointerEvents = 'none';
+                        
+                        group.style.position = 'relative';
+                        input.style.paddingTop = '20px';
+                        input.style.transition = 'border-color 0.3s, box-shadow 0.3s';
+                        
+                        input.addEventListener('focus', () => {
+                            label.style.top = '5px';
+                            label.style.fontSize = '0.7em';
+                            label.style.color = 'var(--nhs-blue)';
+                            input.style.borderColor = 'var(--nhs-blue)';
+                            input.style.boxShadow = '0 0 0 3px rgba(0, 94, 184, 0.1)';
+                        });
+                        
+                        input.addEventListener('blur', () => {
+                            if (!input.value) {
+                                label.style.top = '12px';
+                                label.style.fontSize = '1em';
+                                label.style.color = '#aaa';
+                            }
+                            input.style.borderColor = '#ddd';
+                            input.style.boxShadow = 'none';
+                        });
+                        
+                        // If the input has a value (e.g. from browser autofill)
+                        if (input.value) {
+                            label.style.top = '5px';
+                            label.style.fontSize = '0.7em';
+                        }
+                    }
+                });
+                
+                // Add ripple effect to submit button
+                const submitBtn = contactForm.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.style.position = 'relative';
+                    submitBtn.style.overflow = 'hidden';
+                    
+                    submitBtn.addEventListener('click', function(e) {
+                        const rect = submitBtn.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        const ripple = document.createElement('span');
+                        ripple.style.position = 'absolute';
+                        ripple.style.width = '1px';
+                        ripple.style.height = '1px';
+                        ripple.style.background = 'rgba(255, 255, 255, 0.7)';
+                        ripple.style.borderRadius = '50%';
+                        ripple.style.transform = 'scale(0)';
+                        ripple.style.left = `${x}px`;
+                        ripple.style.top = `${y}px`;
+                        ripple.style.animation = 'ripple 0.8s ease-out forwards';
+                        
+                        submitBtn.appendChild(ripple);
+                        
+                        setTimeout(() => {
+                            ripple.remove();
+                        }, 800);
+                    });
+                }
+            }
+            
+            // Improved gallery hover effects
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    // Scale up the hovered item
+                    this.style.transform = 'translateY(-15px) scale(1.05)';
+                    this.style.zIndex = '10';
+                    this.style.boxShadow = '0 25px 50px rgba(0, 94, 184, 0.3)';
+                    
+                    // Add a glow effect
+                    this.style.filter = 'brightness(1.1)';
+                    
+                    // Dim other items
+                    document.querySelectorAll('.gallery-item').forEach(otherItem => {
+                        if (otherItem !== this) {
+                            otherItem.style.opacity = '0.5';
+                            otherItem.style.transform = 'scale(0.95)';
+                            otherItem.style.filter = 'blur(2px) grayscale(30%)';
+                        }
+                    });
+                    
+                    // Show overlay immediately
+                    const overlay = this.querySelector('.gallery-item-overlay');
+                    if (overlay) {
+                        overlay.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    // Restore this item
+                    this.style.transform = '';
+                    this.style.zIndex = '';
+                    this.style.boxShadow = '';
+                    this.style.filter = '';
+                    
+                    // Restore other items
+                    document.querySelectorAll('.gallery-item').forEach(otherItem => {
+                        otherItem.style.opacity = '1';
+                        otherItem.style.transform = '';
+                        otherItem.style.filter = '';
+                    });
+                    
+                    // Hide overlay with delay
+                    const overlay = this.querySelector('.gallery-item-overlay');
+                    if (overlay) {
+                        overlay.style.transform = 'translateY(100%)';
+                    }
+                });
+            });
+        });
+        
+        // Helper function to create a floating particle
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            const size = Math.random() * 15 + 5;
+            
+            // Style the particle
+            particle.style.position = 'absolute';
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.background = 'rgba(255, 255, 255, 0.3)';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            
+            // Position randomly
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Animation properties
+            const duration = Math.random() * 20 + 10;
+            const delay = Math.random() * 5;
+            
+            particle.style.animation = `float-${container.children.length} ${duration}s ease-in-out ${delay}s infinite`;
+            
+            // Add unique motion by setting different keyframes for each particle
+            const keyframes = `
+                @keyframes float-${container.children.length} {
+                    0% {
+                        transform: translate(0, 0) rotate(0deg);
+                        opacity: ${Math.random() * 0.5 + 0.2};
+                    }
+                    25% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg);
+                        opacity: ${Math.random() * 0.5 + 0.5};
+                    }
+                    50% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg);
+                        opacity: ${Math.random() * 0.5 + 0.2};
+                    }
+                    75% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg);
+                        opacity: ${Math.random() * 0.5 + 0.5};
+                    }
+                    100% {
+                        transform: translate(0, 0) rotate(0deg);
+                        opacity: ${Math.random() * 0.5 + 0.2};
+                    }
+                }
+            `;
+            
+            // Add keyframes to document
+            const style = document.createElement('style');
+            style.textContent = keyframes;
+            document.head.appendChild(style);
+            
+            // Use the specific animation
+            particle.style.animation = `float-${container.children.length} ${duration}s ease-in-out ${delay}s infinite`;
+            
+            // Add to container
+            container.appendChild(particle);
+        }
+        
+        // Add ripple effect keyframe animation
+        const rippleKeyframes = `
+            @keyframes ripple {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(300);
+                    opacity: 0;
+                }
+            }
+        `;
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = rippleKeyframes;
+        document.head.appendChild(rippleStyle);
     </script>
 </body>
 </html> 
