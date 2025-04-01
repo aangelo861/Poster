@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNWL Trauma-Informed Approaches Mobile App</title>
+    <style>
+        @page {
+            size: A0 portrait;
+            margin: 0;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        html, body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', 'Arial', sans-serif;
+            color: #333;
+            background-color: #f5f5f5;
+            height: 100%;
+            width: 100%;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        /* Poster container with fixed aspect ratio */
+        .poster-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            background-image: linear-gradient(to bottom, rgba(0, 94, 184, 0.05), rgba(0, 0, 0, 0));
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* For print, use A0 dimensions */
+        @media print {
+            .poster-container {
+                width: 841mm;
+                height: 1189mm;
+                max-width: none;
+                margin: 0;
+                box-shadow: none;
+            }
+        }
+        
+        /* Content styling */
+        .poster-content {
+            padding: 2.5%;
+            display: grid;
+            grid-template-rows: auto 1fr auto;
+            grid-template-columns: 1fr;
+            gap: 2%;
+            height: 100%;
+        }
+        
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            border-bottom: 3px solid #005EB8;
+            padding-bottom: 1.5%;
+            position: relative;
+        }
+        
+        .header::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #330072;
+        }
+        
+        .logo {
+            height: 80px;
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.1));
+        }
+        
+        .title-container {
+            text-align: right;
+            flex-grow: 1;
+            margin-left: 3%;
+        }
+        
+        h1 {
+            color: #005EB8;
+            font-size: 2.5rem;
+            margin: 0;
+            text-shadow: 0 2px 3px rgba(0,0,0,0.1);
+            letter-spacing: -0.5px;
+        }
+        
+        h2 {
+            color: #330072;
+            font-size: 1.2rem;
+            font-weight: normal;
+            margin: 10px 0 0 0;
+        }
+        
+        .subtitle {
+            font-style: italic;
+            font-size: 1rem;
+            color: #555;
+            margin-top: 6px;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 2%;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 5px;
+            padding: 1%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .content-section {
+            display: flex;
+            flex-direction: column;
+            gap: 2%;
+        }
+        
+        .section {
+            margin-bottom: 2%;
+            padding: 2%;
+            border-radius: 4px;
+            background-color: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .section:hover {
+            box-shadow: 0 3px 6px rgba(0, 94, 184, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        h3 {
+            color: #005EB8;
+            font-size: 1.3rem;
+            margin: 0 0 10px 0;
+            border-bottom: 1px solid #005EB8;
+            padding-bottom: 4px;
+            position: relative;
+        }
+        
+        h3::after {
+            content: "";
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 20%;
+            height: 3px;
+            background-color: #330072;
+        }
+        
+        p {
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin: 0 0 10px 0;
+            text-align: justify;
+        }
+        
+        .app-screenshot {
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            width: 100%;
+            max-width: 300px;
+            height: auto;
+            object-fit: contain;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+            margin: 0 auto;
+            display: block;
+        }
+        
+        .app-screenshot:hover {
+            transform: scale(1.02);
+            box-shadow: 0 6px 12px rgba(0, 94, 184, 0.3);
+        }
+        
+        .screenshot-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .caption {
+            font-size: 0.9rem;
+            color: #555;
+            text-align: center;
+            font-style: italic;
+            max-width: 90%;
+            background-color: #f0f6ff;
+            padding: 8px 12px;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        @media (max-width: 600px) {
+            .features {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .feature {
+            background-color: #f0f6ff;
+            border-left: 4px solid #005EB8;
+            padding: 8px;
+            border-radius: 0 4px 4px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .feature h4 {
+            color: #005EB8;
+            margin: 0 0 4px 0;
+            font-size: 1rem;
+        }
+        
+        .feature p {
+            font-size: 0.9rem;
+            margin: 0;
+            text-align: left;
+        }
+        
+        .testimonials {
+            font-style: italic;
+            padding: 10px 15px;
+            background-color: #f0f6ff;
+            border-radius: 4px;
+            margin: 10px 0;
+            position: relative;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        
+        .testimonials::before {
+            content: """;
+            position: absolute;
+            top: -15px;
+            left: 10px;
+            font-size: 30pt;
+            color: rgba(0, 94, 184, 0.2);
+            font-family: Georgia, serif;
+        }
+        
+        .footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            border-top: 1px solid #ccc;
+            padding-top: 15px;
+            background-color: rgba(255, 255, 255, 0.7);
+            border-radius: 4px;
+            padding: 15px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.03);
+            margin-top: 2%;
+        }
+        
+        .highlight {
+            color: #005EB8;
+            font-weight: bold;
+        }
+        
+        .tools-title {
+            text-align: center;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .tools-title::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 25%;
+            width: 50%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, #005EB8, transparent);
+        }
+        
+        .badge {
+            display: inline-block;
+            background-color: #005EB8;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            margin-right: 5px;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        
+        /* Responsive scaling */
+        @media screen and (min-width: 1500px) {
+            .poster-container {
+                max-width: 1400px;
+            }
+            h1 { font-size: 3rem; }
+            h2 { font-size: 1.5rem; }
+            p { font-size: 1.1rem; }
+        }
+        
+        @media screen and (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                text-align: center;
+            }
+            .title-container {
+                text-align: center;
+                margin-left: 0;
+                margin-top: 15px;
+            }
+            h1 { font-size: 1.8rem; }
+            h2 { font-size: 1rem; }
+            .logo { height: 60px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-container">
+        <div class="poster-content">
+            <div class="header">
+                <!-- SVG NHS logo instead of base64 image -->
+                <svg class="logo" width="200" height="100" viewBox="0 0 200 100">
+                    <rect x="0" y="0" width="200" height="100" fill="#005EB8"/>
+                    <text x="20" y="60" fill="white" font-family="Arial" font-weight="bold" font-size="60">NHS</text>
+                </svg>
+                <div class="title-container">
+                    <h1>CNWL Trauma-Informed Approaches Mobile App</h1>
+                    <h2>Bridging Evidence-Based Care and Digital Innovation in Mental Health</h2>
+                    <div class="subtitle">Central and North West London NHS Foundation Trust</div>
+                </div>
+            </div>
+
+            <div class="main-content">
+                <div class="content-section">
+                    <div class="section">
+                        <h3>Introduction</h3>
+                        <p>The CNWL Trauma-Informed Approaches mobile application represents a significant advancement in the delivery of mental health resources, transforming evidence-based trauma-informed care into an accessible, private digital platform. Developed in collaboration with mental health professionals from Central and North West London NHS Foundation Trust, this application aligns with the NHS Long Term Plan (2019), which has established a ten-year roadmap for mental health services to become trauma-informed.</p>
+                        <p>The fundamental shift in trauma-informed care moves away from asking <span class="highlight">"What is wrong with you?"</span> to instead asking <span class="highlight">"What has happened to you?"</span> This perspective recognizes that trauma experiences are common and require specialized approaches to care.</p>
+                    </div>
+
+                    <div class="section">
+                        <h3>Understanding Trauma-Informed Approaches</h3>
+                        <p>Trauma-informed approaches acknowledge the relationship between people's life experiences and the development of mental health difficulties. Research has shown that experiencing traumatic and/or adverse life events can place individuals at higher risk of a range of health and social difficulties (WHO, 2014).</p>
+                        <p>The CNWL Trauma-Informed Approaches framework recognizes that in times of distress, people experiencing mental health difficulties often feel unstable, making forward progress challenging. <span class="highlight">Psychological stabilization</span>—the process of learning and implementing various skills and strategies to manage distress—forms the foundation of the app's therapeutic approach.</p>
+                    </div>
+
+                    <div class="section">
+                        <h3>Comprehensive Digital Resource Library</h3>
+                        <p>The application digitizes CNWL's extensive Stabilisation Manual, comprising ten evidence-based workbooks:</p>
+                        <div class="features">
+                            <div class="feature">
+                                <h4>Introduction to Trauma-Informed Approaches</h4>
+                                <p>Foundational understanding of how trauma affects mental health</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Developing Self-Compassion</h4>
+                                <p>Learning to be kind to oneself during recovery</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Sensory Soothing</h4>
+                                <p>Techniques to calm and soothe oneself through sensory experiences</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Mindfulness</h4>
+                                <p>Practices for being present in the moment</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Effective Communication</h4>
+                                <p>Skills for clear expression during difficult conversations</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Breathing and Relaxation</h4>
+                                <p>Techniques to calm the body and mind</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Food and Sleep</h4>
+                                <p>Addressing basic needs for overall wellbeing</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Distraction and Distancing</h4>
+                                <p>Methods to step back from difficult thoughts and feelings</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Values and Meaningful Activities</h4>
+                                <p>Engaging with what's personally important</p>
+                            </div>
+                            <div class="feature">
+                                <h4>Maintaining Wellbeing</h4>
+                                <p>Strategies for ongoing mental health management</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Privacy-First Design Philosophy</h3>
+                        <p>In recognition of the sensitive nature of mental health information and the importance of confidentiality in trauma recovery, the application implements a rigorous privacy-first approach:</p>
+                        <div class="features">
+                            <div class="feature">
+                                <p>All user data remains exclusively on the device</p>
+                            </div>
+                            <div class="feature">
+                                <p>No accounts, logins, or cloud storage required</p>
+                            </div>
+                            <div class="feature">
+                                <p>Complete functionality without internet connection</p>
+                            </div>
+                            <div class="feature">
+                                <p>No third-party tracking or data collection</p>
+                            </div>
+                            <div class="feature">
+                                <p>Minimal permissions requested</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>Clinical Applications</h3>
+                        <p>The CNWL Trauma-Informed Approaches app serves as a valuable adjunct to professional mental health care:</p>
+                        <div class="features">
+                            <div class="feature">
+                                <p><span class="highlight">Patient Resource:</span> Clinicians can recommend the app to extend therapeutic support</p>
+                            </div>
+                            <div class="feature">
+                                <p><span class="highlight">Between-Session Support:</span> Reinforces concepts and skills learned in therapy</p>
+                            </div>
+                            <div class="feature">
+                                <p><span class="highlight">Crisis Management:</span> Provides immediate access to grounding techniques</p>
+                            </div>
+                            <div class="feature">
+                                <p><span class="highlight">Stepped Care Integration:</span> Supports various levels of intervention intensity</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <h3>User Testimonials</h3>
+                        <div class="testimonials">
+                            <p>"I think TIA makes a real difference on the ward... for the first time in a very long time, it's given me purpose and hope."</p>
+                        </div>
+                        <div class="testimonials">
+                            <p>"Helped me to open up and become more aware of my difficulties as well as how to support myself."</p>
+                        </div>
+                        <div class="testimonials">
+                            <p>"I learnt a lot about self-compassion and being kind to myself."</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="content-section">
+                    <div class="section">
+                        <h3 class="tools-title">Interactive Therapeutic Tools</h3>
+                        
+                        <div class="screenshot-container">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" class="app-screenshot" alt="Home Screen">
+                            <div class="caption">
+                                <span class="badge">Navigation</span> <span class="badge">Overview</span>
+                                Home Screen providing access to all app features
+                            </div>
+                        </div>
+                        
+                        <div class="screenshot-container">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" class="app-screenshot" alt="Grounding Techniques">
+                            <div class="caption">
+                                <span class="badge">Stabilization</span> <span class="badge">Interactive</span>
+                                Grounding Techniques to reconnect with the present moment
+                            </div>
+                        </div>
+                        
+                        <div class="screenshot-container">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" class="app-screenshot" alt="Meditation Timer">
+                            <div class="caption">
+                                <span class="badge">Mindfulness</span> <span class="badge">Audio</span>
+                                Customizable Meditation Timer with ambient sounds
+                            </div>
+                        </div>
+                        
+                        <div class="screenshot-container">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" class="app-screenshot" alt="Mood Journal">
+                            <div class="caption">
+                                <span class="badge">Self-awareness</span> <span class="badge">Tracking</span>
+                                Secure Mood Journal for tracking emotional patterns
+                            </div>
+                        </div>
+                        
+                        <div class="screenshot-container">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" class="app-screenshot" alt="Implementation Intentions">
+                            <div class="caption">
+                                <span class="badge">Planning</span> <span class="badge">Structure</span>
+                                Implementation Intentions for positive habit formation
+                            </div>
+                        </div>
+                        
+                        <div class="screenshot-container">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" class="app-screenshot" alt="Interactive CBT Worksheet">
+                            <div class="caption">
+                                <span class="badge">Cognitive</span> <span class="badge">Restructuring</span>
+                                Interactive CBT Worksheets for restructuring thought patterns
+                            </div>
+                        </div>
+                        
+                        <div class="screenshot-container">
+                            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNk+A8AAQUBAScY42YAAAAASUVORK5CYII=" class="app-screenshot" alt="Resource Library">
+                            <div class="caption">
+                                <span class="badge">Education</span> <span class="badge">Multimedia</span>
+                                Resource Library with PDF and audio options
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>Developed in collaboration with mental health professionals from Central and North West London NHS Foundation Trust.<br>
+                This application serves as a complement to, not a replacement for, professional mental health care.</p>
+                <p><strong>Central and North West London NHS Foundation Trust</strong> | <em>Wellbeing for life</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add aspect ratio adjustment for the poster container
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.poster-container');
+            function adjustAspectRatio() {
+                // Use a 1:√2 aspect ratio (A0 paper proportion)
+                const width = container.offsetWidth;
+                container.style.height = (width * 1.414) + 'px';
+            }
+            
+            // Initial adjustment
+            adjustAspectRatio();
+            
+            // Adjust on window resize
+            window.addEventListener('resize', adjustAspectRatio);
+            
+            // Replace placeholder images with actual content when needed
+            // (currently using transparent 1x1 pixel placeholders)
+        });
+    </script>
+</body>
+</html> 
