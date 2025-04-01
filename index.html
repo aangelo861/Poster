@@ -1,0 +1,2130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CNWL Trauma-Informed Approaches Mobile App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nhs-blue: #005EB8;
+            --nhs-dark-blue: #003087;
+            --nhs-purple: #330072;
+            --nhs-light-blue: #41B6E6;
+            --nhs-light-gray: #f0f4f5;
+            --nhs-dark-gray: #425563;
+            --animation-duration: 0.5s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            height: 60px;
+            margin-right: 20px;
+            max-width: 250px;
+            object-fit: contain;
+        }
+
+        .site-title {
+            flex-grow: 1;
+        }
+
+        .site-title h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--nhs-blue);
+            margin-bottom: 5px;
+        }
+
+        .site-title p {
+            font-size: 0.9rem;
+            color: var(--nhs-dark-gray);
+        }
+
+        /* Hero section */
+        .hero {
+            background: linear-gradient(135deg, var(--nhs-blue) 0%, var(--nhs-dark-blue) 50%, var(--nhs-purple) 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 15s ease infinite;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            animation: fadeInUp var(--animation-duration) ease-out;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            opacity: 0.9;
+            animation: fadeInUp var(--animation-duration) ease-out 0.2s forwards;
+        }
+
+        .hero-cta {
+            display: inline-block;
+            background-color: white;
+            color: var(--nhs-blue);
+            padding: 14px 36px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            animation: fadeInUp var(--animation-duration) ease-out 0.4s forwards;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+            color: white;
+        }
+
+        .hero-cta:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 100%;
+            background: var(--nhs-blue);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: -1;
+        }
+
+        .hero-cta:hover:before {
+            width: 100%;
+        }
+
+        /* About section */
+        .about {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2rem;
+            color: var(--nhs-blue);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: var(--nhs-blue);
+            margin: 15px auto 0;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .about-text {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .about-text.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-image {
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Key features section */
+        .key-features {
+            padding: 80px 0;
+            background-color: var(--nhs-light-gray);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .feature-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,94,184,0.15);
+        }
+
+        .feature-icon {
+            animation: float 5s ease-in-out infinite;
+            background: linear-gradient(135deg, var(--nhs-light-blue) 0%, var(--nhs-blue) 100%);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            color: white;
+            font-size: 28px;
+            box-shadow: 0 10px 20px rgba(65,182,230,0.3);
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--nhs-blue);
+            font-size: 1.3rem;
+        }
+
+        /* App Gallery Section */
+        .app-gallery {
+            padding: 80px 0;
+            background-color: #f9fafb;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 50px;
+        }
+
+        .gallery-item {
+            aspect-ratio: 9/16;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            position: relative;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .gallery-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,94,184,0.25);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,94,184,0.9), transparent);
+            padding: 30px 20px 20px;
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .gallery-item:hover .gallery-item-overlay {
+            transform: translateY(0);
+        }
+
+        .gallery-item-overlay h4 {
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .gallery-item-overlay p {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Testimonials section */
+        .testimonials {
+            padding: 80px 0;
+            background-color: #f0f7ff;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonial-slide {
+            padding: 40px;
+            text-align: center;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+            position: absolute;
+            width: 100%;
+            top: 0;
+            left: 0;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            position: relative;
+        }
+
+        .testimonial-text {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 30px;
+            position: relative;
+            padding: 0 50px;
+        }
+
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--nhs-blue);
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .testimonial-author:after {
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 3px;
+            background: var(--nhs-light-blue);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .slider-dot.active {
+            background-color: var(--nhs-blue);
+        }
+
+        /* Privacy section */
+        .privacy {
+            padding: 80px 0;
+            background-color: white;
+        }
+
+        .privacy-features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .privacy-feature {
+            display: flex;
+            align-items: flex-start;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        .privacy-feature.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .privacy-icon {
+            background-color: #e6f2ff;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            color: var(--nhs-blue);
+            flex-shrink: 0;
+        }
+
+        .privacy-text h3 {
+            margin-bottom: 10px;
+            color: var(--nhs-blue);
+            font-size: 1.2rem;
+        }
+
+        /* Contact section */
+        .contact {
+            padding: 80px 0;
+            background-color: var(--nhs-dark-blue);
+            color: white;
+        }
+
+        .contact .section-title:after {
+            background-color: white;
+        }
+
+        .contact .section-title h2 {
+            color: white;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .contact-text {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .contact-text.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-form {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+
+        .contact-form.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--nhs-dark-gray);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background-color: var(--nhs-blue);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--nhs-dark-blue);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #333;
+            color: #aaa;
+            padding: 30px 0 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #555;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-info {
+            line-height: 1.8;
+        }
+        
+        .footer-info a {
+            color: var(--nhs-light-blue);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-info a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .footer-reference {
+            font-style: italic;
+            color: #888;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-info, .footer-reference {
+                margin-bottom: 15px;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+            50% {
+                transform: scale(1.03);
+                box-shadow: 0 15px 30px rgba(0,94,184,0.2);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .gallery-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .gallery-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .privacy-features {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .lead-paragraph {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: var(--nhs-dark-blue);
+        }
+        
+        .key-quote {
+            border-left: 4px solid var(--nhs-blue);
+            padding: 0.5rem 0 0.5rem 1.5rem;
+            margin: 1.5rem 0;
+            font-size: 1.25rem;
+            font-weight: 500;
+            font-style: italic;
+            color: var(--nhs-blue);
+        }
+        
+        .research-highlight {
+            background-color: rgba(65, 182, 230, 0.1);
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--nhs-light-blue);
+        }
+        
+        .about-text p {
+            margin-bottom: 1.2rem;
+        }
+
+        /* Acknowledgements section styling */
+        .acknowledgements {
+            padding: 80px 0;
+            background-color: #f9f5ff;
+            background-image: linear-gradient(to bottom right, #f9f5ff, #f0f7ff);
+        }
+        
+        .acknowledgements-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .acknowledgements-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            text-align: center;
+            border-top: 5px solid var(--nhs-purple);
+        }
+        
+        .quote-icon {
+            font-size: 60px;
+            color: var(--nhs-purple);
+            opacity: 0.2;
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            font-family: Georgia, serif;
+        }
+        
+        .acknowledgements-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 20px;
+            color: var(--nhs-dark-gray);
+            font-weight: 500;
+        }
+        
+        .divider {
+            height: 3px;
+            width: 100px;
+            background: linear-gradient(to right, var(--nhs-light-blue), var(--nhs-purple));
+            margin: 25px auto;
+            border-radius: 3px;
+        }
+        
+        .acknowledgements-note {
+            font-style: italic;
+            color: var(--nhs-dark-blue);
+            font-size: 0.95rem;
+        }
+
+        @media (max-width: 768px) {
+            .acknowledgements-card {
+                padding: 30px 20px;
+            }
+        }
+
+        .credit-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 94, 184, 0.05);
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            border-left: 3px solid var(--nhs-blue);
+        }
+
+        .credit-badge-icon {
+            font-size: 28px;
+            margin-right: 15px;
+            background: linear-gradient(135deg, var(--nhs-light-blue) 0%, var(--nhs-blue) 100%);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0,94,184,0.2);
+        }
+
+        .credit-badge-text {
+            text-align: left;
+            color: var(--nhs-dark-blue);
+        }
+
+        .credit-badge-text strong {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .app-store-btn {
+            display: flex;
+            align-items: center;
+            background-color: #000;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .app-store-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .app-icon {
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .app-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.2;
+        }
+
+        .app-small {
+            font-size: 0.7rem;
+            font-weight: 400;
+        }
+
+        .app-large {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .developer-credit {
+            font-size: 0.95rem;
+            color: var(--nhs-dark-gray);
+            margin: 15px 0;
+            font-style: italic;
+            text-align: center;
+            opacity: 0.8;
+        }
+
+        /* Enhanced mobile responsiveness */
+        @media screen and (max-width: 768px) {
+            /* General mobile adjustments */
+            body {
+                font-size: 15px;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+            
+            /* Header adjustments */
+            .header-content {
+                padding: 10px 0;
+            }
+            
+            .logo {
+                height: 40px;
+                margin-right: 10px;
+            }
+            
+            .site-title h1 {
+                font-size: 1.2rem;
+            }
+            
+            .site-title p {
+                font-size: 0.8rem;
+            }
+            
+            /* Hero section */
+            .hero {
+                padding: 40px 0;
+            }
+            
+            .hero h1 {
+                font-size: 1.8rem;
+                margin-bottom: 15px;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+                margin-bottom: 25px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .app-store-btn, .hero-cta {
+                width: 100%;
+                max-width: 280px;
+                justify-content: center;
+                padding: 12px 20px;
+            }
+            
+            /* About section */
+            .about {
+                padding: 40px 0;
+            }
+            
+            .section-title {
+                margin-bottom: 30px;
+            }
+            
+            .section-title h2 {
+                font-size: 1.6rem;
+            }
+            
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .about-image {
+                max-width: 280px;
+                margin: 0 auto;
+                transform: none !important;
+            }
+            
+            .key-quote {
+                font-size: 1.1rem;
+                padding-left: 1rem;
+            }
+            
+            /* Key features section */
+            .key-features {
+                padding: 40px 0;
+            }
+            
+            .features-grid {
+                gap: 20px;
+            }
+            
+            .feature-card {
+                padding: 20px;
+            }
+            
+            .feature-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+            
+            /* Gallery */
+            .app-gallery {
+                padding: 40px 0;
+            }
+            
+            .gallery-container {
+                gap: 15px;
+            }
+            
+            .gallery-item {
+                aspect-ratio: 9/19;
+                max-width: 250px;
+                margin: 0 auto;
+            }
+            
+            /* Testimonials */
+            .testimonial-text {
+                font-size: 1.1rem;
+                padding: 0 20px;
+            }
+            
+            /* Privacy features */
+            .privacy {
+                padding: 40px 0;
+            }
+            
+            /* Acknowledgements */
+            .acknowledgements {
+                padding: 40px 0;
+            }
+            
+            .acknowledgements-card {
+                padding: 25px 15px;
+            }
+            
+            .acknowledgements-text {
+                font-size: 1rem;
+            }
+            
+            /* Fix for 3D transforms on mobile */
+            .about-image:hover {
+                transform: none !important;
+            }
+            
+            /* Reduce animations on mobile for better performance */
+            @media (prefers-reduced-motion: reduce) {
+                * {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                    scroll-behavior: auto !important;
+                }
+            }
+        }
+        
+        /* iPhone-specific fixes */
+        @media screen and (max-width: 428px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+            
+            .app-store-btn, .hero-cta {
+                width: 100%;
+                max-width: 100%;
+            }
+            
+            .about-image {
+                max-width: 100%;
+            }
+            
+            .gallery-item {
+                aspect-ratio: auto;
+                height: 450px;
+                max-width: 100%;
+            }
+            
+            .quote-icon {
+                font-size: 40px;
+                top: -10px;
+                left: 10px;
+            }
+            
+            /* Fix for iOS Safari overflow issues */
+            .gallery-item-overlay {
+                -webkit-transform: translateY(100%);
+                transform: translateY(100%);
+            }
+            
+            .gallery-item:hover .gallery-item-overlay {
+                -webkit-transform: translateY(0);
+                transform: translateY(0);
+            }
+            
+            /* Footer adjustments */
+            .footer-info {
+                font-size: 0.85rem;
+            }
+        }
+
+        .insight-text {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 1.2rem 0;
+        }
+        
+        .highlight-text {
+            color: var(--nhs-blue);
+            font-weight: 500;
+        }
+        
+        .research-highlight {
+            background-color: rgba(65, 182, 230, 0.1);
+            padding: 1rem 1rem 1rem 4rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--nhs-light-blue);
+            position: relative;
+        }
+        
+        .research-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.8rem;
+            color: var(--nhs-light-blue);
+            opacity: 0.8;
+        }
+        
+        .citation {
+            font-weight: 500;
+            color: var(--nhs-dark-blue);
+        }
+        
+        .approach-summary {
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 1.5rem 0;
+            padding-left: 0.8rem;
+            border-left: 2px solid rgba(65, 182, 230, 0.4);
+        }
+        
+        .key-concept {
+            font-weight: 600;
+            color: var(--nhs-blue);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <img src="central-and-north-west-london-nhs-foundation-trust-cnwl-logo-vector.png" alt="CNWL NHS Foundation Trust Logo" class="logo">
+                <div class="site-title">
+                    <h1>Trauma-Informed Approaches</h1>
+                    <p>Central and North West London NHS Foundation Trust</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Bridging Evidence-Based Care and Digital Innovation</h1>
+            <p>A mobile application transforming trauma-informed care into an accessible, private digital platform</p>
+            <div class="hero-buttons">
+                <a href="https://apps.apple.com/us/app/traumainformed/id6744029833" target="_blank" class="app-store-btn">
+                    <span class="app-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" width="16" height="20">
+                            <path fill="currentColor" d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+                        </svg>
+                    </span>
+                    <span class="app-text">
+                        <span class="app-small">Download on the</span>
+                        <span class="app-large">App Store</span>
+                    </span>
+                </a>
+                <a href="#about" class="hero-cta">Learn More</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>Understanding Trauma-Informed Approaches</h2>
+            </div>
+            <div class="about-content">
+                <div class="about-text">
+                    <p class="lead-paragraph">The CNWL Trauma-Informed Approaches mobile application represents a significant advancement in the delivery of mental health resources. Developed in collaboration with mental health professionals from Central and North West London NHS Foundation Trust, this application aligns with the NHS Long Term Plan (2019), which has established a ten-year roadmap for mental health services to become trauma-informed.</p>
+                    
+                    <blockquote class="key-quote">
+                        <p>The fundamental shift in trauma-informed care moves away from asking "What is wrong with you?" to instead asking "What has happened to you?"</p>
+                    </blockquote>
+                    
+                    <p class="insight-text">This perspective recognizes that trauma experiences are common and require <span class="highlight-text">specialized approaches to care</span>. Trauma-informed approaches acknowledge the intricate relationship between people's life experiences and the development of mental health difficulties.</p>
+                    
+                    <div class="research-highlight">
+                        <div class="research-icon">📊</div>
+                        <p>Research has shown that experiencing traumatic and/or adverse life events can place individuals at higher risk of a range of health and social difficulties <span class="citation">(WHO, 2014)</span>.</p>
+                    </div>
+                    
+                    <p class="approach-summary">The CNWL Trauma-Informed Approaches framework recognizes that in times of distress, people experiencing mental health difficulties often feel unstable, making forward progress challenging. <span class="key-concept">Psychological stabilization</span>—the process of learning and implementing various skills and strategies to manage distress—forms the foundation of the app's therapeutic approach.</p>
+                </div>
+                <div class="about-image">
+                    <img src="Home.png" alt="Home Screen of the App" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="key-features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Comprehensive Digital Resources</h2>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📚</div>
+                    <h3>Resource Library</h3>
+                    <p>Access to CNWL's extensive Stabilisation Manual, comprising ten evidence-based workbooks that introduce users to various stabilization skills.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🧠</div>
+                    <h3>Grounding Techniques</h3>
+                    <p>Quick-access exercises including the 5-4-3-2-1 technique, deep breathing, body scan, and object focus to help reconnect with the present moment.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⏱️</div>
+                    <h3>Meditation Timer</h3>
+                    <p>Customizable meditation timer with ambient sounds and progress tracking to develop a consistent mindfulness practice.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Mood Journal</h3>
+                    <p>Secure mood journal for private tracking of emotional patterns and triggers, fostering self-awareness and emotional literacy.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📅</div>
+                    <h3>Implementation Intentions</h3>
+                    <p>Structured activity planning with calendar integration to support positive habit formation through when, where, and how planning.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💭</div>
+                    <h3>CBT Worksheets</h3>
+                    <p>Digital cognitive behavioral therapy exercises with save functionality to apply evidence-based techniques to challenge unhelpful thought patterns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="app-gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>App Gallery</h2>
+            </div>
+            <div class="gallery-container">
+                <div class="gallery-item">
+                    <img src="Home.png" alt="Home Screen" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';">
+                    <div class="gallery-item-overlay">
+                        <h4>Home Screen</h4>
+                        <p>Clean, intuitive navigation to all app features</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="Grounding.png" alt="Grounding Techniques" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';">
+                    <div class="gallery-item-overlay">
+                        <h4>Grounding Techniques</h4>
+                        <p>Evidence-based methods to reconnect with the present moment</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="MediationTimer.png" alt="Meditation Timer" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';">
+                    <div class="gallery-item-overlay">
+                        <h4>Meditation Timer</h4>
+                        <p>Customizable timer with ambient sounds for mindfulness practice</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="ImplementationIntentions.png" alt="Implementation Intentions" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';">
+                    <div class="gallery-item-overlay">
+                        <h4>Implementation Intentions</h4>
+                        <p>Structured planning for positive habit formation</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="CBTWorksheets.png" alt="CBT Worksheets" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';">
+                    <div class="gallery-item-overlay">
+                        <h4>CBT Worksheets</h4>
+                        <p>Interactive cognitive behavioral therapy exercises</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="Guides.png" alt="Resource Guides" onerror="this.onerror=null; this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';">
+                    <div class="gallery-item-overlay">
+                        <h4>Resource Guides</h4>
+                        <p>Comprehensive educational materials and guidance</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>User Experiences</h2>
+            </div>
+            <div class="testimonial-slider">
+                <div class="testimonial-slide active">
+                    <p class="testimonial-text">I think TIA makes a real difference on the ward... for the first time in a very long time, it's given me purpose and hope.</p>
+                    <p class="testimonial-author">CNWL Service User</p>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">Helped me to open up and become more aware of my difficulties as well as how to support myself.</p>
+                    <p class="testimonial-author">CNWL Service User</p>
+                </div>
+                <div class="testimonial-slide">
+                    <p class="testimonial-text">I learnt a lot about self-compassion and being kind to myself.</p>
+                    <p class="testimonial-author">CNWL Service User</p>
+                </div>
+                <div class="slider-nav">
+                    <div class="slider-dot active" data-slide="0"></div>
+                    <div class="slider-dot" data-slide="1"></div>
+                    <div class="slider-dot" data-slide="2"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="privacy">
+        <div class="container">
+            <div class="section-title">
+                <h2>Privacy-First Design</h2>
+            </div>
+            <div class="privacy-features">
+                <div class="privacy-feature">
+                    <div class="privacy-icon">🔒</div>
+                    <div class="privacy-text">
+                        <h3>Device-Only Data</h3>
+                        <p>All user data remains exclusively on the device, ensuring complete privacy and confidentiality.</p>
+                    </div>
+                </div>
+                <div class="privacy-feature">
+                    <div class="privacy-icon">👤</div>
+                    <div class="privacy-text">
+                        <h3>No Accounts Required</h3>
+                        <p>No accounts, logins, or cloud storage required, removing barriers to access.</p>
+                    </div>
+                </div>
+                <div class="privacy-feature">
+                    <div class="privacy-icon">📱</div>
+                    <div class="privacy-text">
+                        <h3>Offline Functionality</h3>
+                        <p>Complete functionality without internet connection, ensuring accessibility anywhere.</p>
+                    </div>
+                </div>
+                <div class="privacy-feature">
+                    <div class="privacy-icon">👁️</div>
+                    <div class="privacy-text">
+                        <h3>No Tracking</h3>
+                        <p>No third-party tracking or data collection, respecting user privacy at all times.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add acknowledgements section -->
+    <section class="acknowledgements">
+        <div class="container">
+            <div class="section-title">
+                <h2>Acknowledgements</h2>
+            </div>
+            <div class="acknowledgements-content">
+                <div class="acknowledgements-card">
+                    <div class="quote-icon">❝</div>
+                    <p class="acknowledgements-text">These manuals have been developed by the Harrow TIA Team (Faye Nikopaschos,
+                    Gail Burrell, Sheelagh Holmes, Nick Rhodes and Cleo Boado) from the Cwm Taf
+                    Morgannwg University Health Board – Psychological Therapies Department
+                    Stabilisation Pack</p>
+                    <p class="developer-credit">
+                        iOS Application Development: Dr. Aangelo Gurusinghe
+                    </p>
+                    <div class="divider"></div>
+                    <p class="acknowledgements-note">We express our sincere gratitude to all contributors for their expertise and dedication in creating these valuable resources.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p>Central and North West London NHS Foundation Trust,<br>
+                    350 Euston Road, Regent's Place, London NW1 3AX<br>
+                    Tel: 020 3214 5700 <a href="https://www.cnwl.nhs.uk" target="_blank">www.cnwl.nhs.uk</a></p>
+                </div>
+                <div class="footer-reference">
+                    <p>Ref: 1855_DEC2020 | December 2020</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; Central and North West London NHS Foundation Trust</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Dynamically test folder paths when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // Try different folder paths that might contain images
+            const possiblePaths = [
+                'TraumaInformedScreens/',
+                'traumainformedscreens/',
+                'trauma-informed-screens/',
+                'Screens/',
+                'screens/',
+                'Screenshots/',
+                'screenshots/',
+                'Images/',
+                'images/'
+            ];
+            
+            // Function to check if path exists by trying to load a test image
+            function checkPathExists(basePath, callback) {
+                const testImg = new Image();
+                testImg.onload = function() {
+                    console.log(`Found valid path: ${basePath}`);
+                    callback(true);
+                };
+                testImg.onerror = function() {
+                    console.log(`Failed path: ${basePath}`);
+                    callback(false);
+                };
+                // Try to load the Home.png from this path
+                testImg.src = basePath + 'Home.png';
+                // Set a timeout in case the image takes too long to load
+                setTimeout(() => {
+                    if (!testImg.complete) {
+                        testImg.src = '';
+                        callback(false);
+                    }
+                }, 3000);
+            }
+            
+            // Test each path sequentially
+            function testNextPath(index) {
+                if (index >= possiblePaths.length) {
+                    console.log('No valid paths found for images');
+                    return;
+                }
+                
+                checkPathExists(possiblePaths[index], function(exists) {
+                    if (exists) {
+                        // Update all image paths
+                        updateImagePaths(possiblePaths[index]);
+                    } else {
+                        // Try next path
+                        testNextPath(index + 1);
+                    }
+                });
+            }
+            
+            // Start testing paths
+            testNextPath(0);
+            
+            // Function to update all image paths when a valid path is found
+            function updateImagePaths(validPath) {
+                const imageNames = [
+                    'Home.png', 
+                    'Grounding.png', 
+                    'MeditationTimer.png', 
+                    'MediationTimer.png', 
+                    'Journal.png', 
+                    'ImplementationIntentions.png', 
+                    'CBTWorksheets.png', 
+                    'Guides.png'
+                ];
+                
+                // Update all gallery images with the new valid path
+                document.querySelectorAll('.gallery-item img').forEach((img, index) => {
+                    if (index < imageNames.length) {
+                        img.src = validPath + imageNames[index];
+                    }
+                });
+                
+                // Also update the about section image
+                const aboutImage = document.querySelector('.about-image img');
+                if (aboutImage) {
+                    aboutImage.src = validPath + 'Home.png';
+                }
+                
+                console.log('Updated all image paths to use: ' + validPath);
+            }
+        });
+
+        // Function to preload images and fix common issues
+        function preloadImages() {
+            // Attempt possible alternative file paths
+            const alternativePaths = {
+                'TraumaInformedScreens/MeditationTimer.png': 'TraumaInformedScreens/MediationTimer.png',
+                'TraumaInformedScreens/MediationTimer.png': 'TraumaInformedScreens/MeditationTimer.png',
+                'TraumaInformedScreens/Home.png': 'trauma-informed-screens/Home.png',
+                'TraumaInformedScreens/Grounding.png': 'trauma-informed-screens/Grounding.png',
+                'TraumaInformedScreens/Journal.png': 'trauma-informed-screens/Journal.png',
+                'TraumaInformedScreens/ImplementationIntentions.png': 'trauma-informed-screens/ImplementationIntentions.png',
+                'TraumaInformedScreens/CBTWorksheets.png': 'trauma-informed-screens/CBTWorksheets.png',
+                'TraumaInformedScreens/Guides.png': 'trauma-informed-screens/Guides.png'
+            };
+
+            const imageElements = document.querySelectorAll('img');
+            imageElements.forEach(img => {
+                const src = img.getAttribute('src');
+                if (src) {
+                    // Log image path for debugging
+                    console.log(`Loading image: ${src}`);
+                    
+                    // Add error handler for all images
+                    img.addEventListener('error', function() {
+                        console.error(`Failed to load image: ${this.src}`);
+                        
+                        // Try alternative path if one exists
+                        if (alternativePaths[this.src] && this.src !== alternativePaths[this.src]) {
+                            console.log(`Trying alternative path: ${alternativePaths[this.src]}`);
+                            this.src = alternativePaths[this.src];
+                        } else {
+                            // Set a fallback if image still fails to load
+                            this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';
+                        }
+                    });
+                    
+                    // Preload image
+                    const newImg = new Image();
+                    newImg.src = src;
+                }
+            });
+        }
+
+        // Call preload function
+        window.addEventListener('load', preloadImages);
+
+        // Fix for contact form on GitHub Pages
+        document.addEventListener('DOMContentLoaded', function() {
+            const contactForm = document.getElementById('contactForm');
+            if (contactForm) {
+                // Adjust the redirect URL based on your actual GitHub Pages URL
+                const githubPagesUrl = window.location.href.split('/index.html')[0];
+                const redirectInput = contactForm.querySelector('input[name="_next"]');
+                if (redirectInput) {
+                    redirectInput.value = `${githubPagesUrl}/thank-you.html`;
+                }
+                
+                // Show loading state on form submission
+                contactForm.addEventListener('submit', function() {
+                    const submitBtn = this.querySelector('.submit-btn');
+                    if (submitBtn) {
+                        submitBtn.disabled = true;
+                        submitBtn.textContent = 'Sending...';
+                    }
+                });
+            }
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.2
+        };
+
+        // Different animation classes
+        const animationClasses = [
+            'fadeInUp',
+            'fadeInLeft',
+            'fadeInRight'
+        ];
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Add a random animation class to feature cards for variety
+                    if (entry.target.classList.contains('feature-card')) {
+                        const randomAnimation = animationClasses[Math.floor(Math.random() * animationClasses.length)];
+                        entry.target.style.animation = `${randomAnimation} 0.6s forwards`;
+                    }
+                    
+                    // Unobserve after animation is triggered
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements
+        document.querySelectorAll('.about-text, .about-image, .feature-card, .gallery-item, .privacy-feature, .contact-text, .contact-form').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Stagger feature cards animation
+        document.querySelectorAll('.feature-card').forEach((card, index) => {
+            card.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Stagger gallery items animation
+        document.querySelectorAll('.gallery-item').forEach((item, index) => {
+            item.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Stagger privacy features animation
+        document.querySelectorAll('.privacy-feature').forEach((feature, index) => {
+            feature.style.transitionDelay = `${index * 0.1}s`;
+        });
+
+        // Update feature icons to use real icons instead of emojis
+        document.querySelectorAll('.feature-icon').forEach((icon, index) => {
+            // Keep the transition and animation styles
+            const floatY = Math.sin(index) * 5;
+            icon.style.transform = `translateY(${floatY}px)`;
+        });
+
+        // Parallax effect for sections
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            
+            // Subtle parallax on the hero section
+            document.querySelector('.hero').style.backgroundPositionY = `${scrollY * 0.5}px`;
+            
+            // Floating effect for feature icons
+            document.querySelectorAll('.feature-icon').forEach((icon, index) => {
+                const floatY = Math.sin(scrollY / 200 + index) * 5;
+                icon.style.transform = `translateY(${floatY}px)`;
+            });
+        });
+
+        // Testimonial slider
+        const testimonialSlides = document.querySelectorAll('.testimonial-slide');
+        const sliderDots = document.querySelectorAll('.slider-dot');
+        let currentSlide = 0;
+        let testimonialInterval;
+
+        function showSlide(index) {
+            // Hide all slides
+            testimonialSlides.forEach(slide => {
+                slide.classList.remove('active');
+            });
+            
+            // Remove active class from all dots
+            sliderDots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Show the selected slide and activate dot
+            testimonialSlides[index].classList.add('active');
+            sliderDots[index].classList.add('active');
+            
+            currentSlide = index;
+        }
+
+        function nextSlide() {
+            showSlide((currentSlide + 1) % testimonialSlides.length);
+        }
+
+        // Start auto-rotation
+        testimonialInterval = setInterval(nextSlide, 5000);
+
+        // Click on dots to change slide
+        sliderDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                clearInterval(testimonialInterval);
+                showSlide(index);
+                testimonialInterval = setInterval(nextSlide, 5000);
+            });
+        });
+
+        // Enhanced hover effect for gallery items
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                // Dim other items
+                document.querySelectorAll('.gallery-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.style.opacity = '0.7';
+                        otherItem.style.transform = 'scale(0.98)';
+                    }
+                });
+            });
+            
+            item.addEventListener('mouseleave', () => {
+                // Restore all items
+                document.querySelectorAll('.gallery-item').forEach(otherItem => {
+                    if (otherItem !== item) {
+                        otherItem.style.opacity = '1';
+                        otherItem.style.transform = '';
+                    }
+                });
+            });
+
+            // Ensure proper loading and display of images
+            const img = item.querySelector('img');
+            if (img) {
+                img.addEventListener('error', function() {
+                    console.error(`Failed to load image: ${this.src}`);
+                    // Set a fallback if image fails to load
+                    this.src = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iI2YwZjRmNSIvPjx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMjAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0MjU1NjMiPkltYWdlIE5vdCBGb3VuZDwvdGV4dD48L3N2Zz4=';
+                });
+            }
+        });
+
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add CSS animations to stylesheets for JavaScript to use
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(40px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+
+            @keyframes fadeInLeft {
+                from {
+                    opacity: 0;
+                    transform: translateX(-40px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes fadeInRight {
+                from {
+                    opacity: 0;
+                    transform: translateX(40px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateX(0);
+                }
+            }
+
+            @keyframes float {
+                0%, 100% {
+                    transform: translateY(0);
+                }
+                50% {
+                    transform: translateY(-15px);
+                }
+            }
+
+            .feature-icon {
+                animation: float 5s ease-in-out infinite;
+            }
+
+            .feature-icon:nth-child(odd) {
+                animation-delay: 0.5s;
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Advanced animations for a more impressive UI
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate hero section elements
+            const heroElements = document.querySelectorAll('.hero h1, .hero p, .hero-cta');
+            heroElements.forEach((el, index) => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.8s ease, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1)';
+                el.style.transitionDelay = `${0.3 + index * 0.2}s`;
+                
+                setTimeout(() => {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }, 100);
+            });
+            
+            // Add particle background to hero section
+            const hero = document.querySelector('.hero');
+            const particleContainer = document.createElement('div');
+            particleContainer.className = 'particle-container';
+            particleContainer.style.position = 'absolute';
+            particleContainer.style.top = '0';
+            particleContainer.style.left = '0';
+            particleContainer.style.width = '100%';
+            particleContainer.style.height = '100%';
+            particleContainer.style.overflow = 'hidden';
+            particleContainer.style.zIndex = '1';
+            hero.style.position = 'relative';
+            
+            // Insert the particle container as the first child of hero
+            hero.insertBefore(particleContainer, hero.firstChild);
+            
+            // Create the hero content container to position above particles
+            const heroContentElements = document.querySelector('.hero .container');
+            heroContentElements.style.position = 'relative';
+            heroContentElements.style.zIndex = '2';
+            
+            // Create particles
+            for (let i = 0; i < 50; i++) {
+                createParticle(particleContainer);
+            }
+            
+            // Enhance scroll animations
+            window.addEventListener('scroll', function() {
+                // Parallax effects for different sections
+                const scrollPosition = window.scrollY;
+                const sections = document.querySelectorAll('section');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.offsetHeight;
+                    const sectionMiddle = sectionTop + sectionHeight / 2;
+                    const distanceFromMiddle = scrollPosition - sectionMiddle;
+                    
+                    if (section.classList.contains('about')) {
+                        const aboutImage = section.querySelector('.about-image');
+                        if (aboutImage) {
+                            aboutImage.style.transform = `perspective(1000px) rotateY(${distanceFromMiddle * 0.01}deg) translateZ(${Math.abs(distanceFromMiddle) * 0.05}px)`;
+                        }
+                    }
+                    
+                    if (section.classList.contains('key-features')) {
+                        const featureCards = section.querySelectorAll('.feature-card');
+                        featureCards.forEach((card, index) => {
+                            const delay = index * 0.05;
+                            const translateY = Math.max(-10, Math.min(10, -distanceFromMiddle * 0.02));
+                            card.style.transform = `translateY(${translateY}px)`;
+                            card.style.transitionDelay = `${delay}s`;
+                        });
+                    }
+                });
+                
+                // Animate feature icons with scroll position
+                document.querySelectorAll('.feature-icon').forEach((icon, index) => {
+                    const rotationSpeed = 0.02;
+                    const floatY = Math.sin(scrollPosition / 200 + index) * 8;
+                    const rotation = (scrollPosition * rotationSpeed + index * 30) % 360;
+                    
+                    icon.style.transform = `translateY(${floatY}px) rotate(${rotation * 0.1}deg)`;
+                    
+                    // Apply subtle color shift with scroll
+                    const hue = (180 + scrollPosition * 0.05 + index * 20) % 360;
+                    icon.style.background = `linear-gradient(135deg, hsl(${hue}, 70%, 60%) 0%, hsl(${hue + 40}, 90%, 40%) 100%)`;
+                    icon.style.boxShadow = `0 10px 20px rgba(${Math.sin(hue) * 127 + 128}, ${Math.sin(hue + 120) * 127 + 128}, ${Math.sin(hue + 240) * 127 + 128}, 0.3)`;
+                });
+            });
+            
+            // Add hover effects to the contact form
+            const contactForm = document.querySelector('.contact-form');
+            if (contactForm) {
+                const formGroups = contactForm.querySelectorAll('.form-group');
+                formGroups.forEach(group => {
+                    const input = group.querySelector('input, textarea');
+                    const label = group.querySelector('label');
+                    
+                    if (input && label) {
+                        // Create floating label effect
+                        label.style.position = 'absolute';
+                        label.style.top = '12px';
+                        label.style.left = '12px';
+                        label.style.color = '#aaa';
+                        label.style.transition = 'all 0.3s ease';
+                        label.style.pointerEvents = 'none';
+                        
+                        group.style.position = 'relative';
+                        input.style.paddingTop = '20px';
+                        input.style.transition = 'border-color 0.3s, box-shadow 0.3s';
+                        
+                        input.addEventListener('focus', () => {
+                            label.style.top = '5px';
+                            label.style.fontSize = '0.7em';
+                            label.style.color = 'var(--nhs-blue)';
+                            input.style.borderColor = 'var(--nhs-blue)';
+                            input.style.boxShadow = '0 0 0 3px rgba(0, 94, 184, 0.1)';
+                        });
+                        
+                        input.addEventListener('blur', () => {
+                            if (!input.value) {
+                                label.style.top = '12px';
+                                label.style.fontSize = '1em';
+                                label.style.color = '#aaa';
+                            }
+                            input.style.borderColor = '#ddd';
+                            input.style.boxShadow = 'none';
+                        });
+                        
+                        // If the input has a value (e.g. from browser autofill)
+                        if (input.value) {
+                            label.style.top = '5px';
+                            label.style.fontSize = '0.7em';
+                        }
+                    }
+                });
+                
+                // Add ripple effect to submit button
+                const submitBtn = contactForm.querySelector('.submit-btn');
+                if (submitBtn) {
+                    submitBtn.style.position = 'relative';
+                    submitBtn.style.overflow = 'hidden';
+                    
+                    submitBtn.addEventListener('click', function(e) {
+                        const rect = submitBtn.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        
+                        const ripple = document.createElement('span');
+                        ripple.style.position = 'absolute';
+                        ripple.style.width = '1px';
+                        ripple.style.height = '1px';
+                        ripple.style.background = 'rgba(255, 255, 255, 0.7)';
+                        ripple.style.borderRadius = '50%';
+                        ripple.style.transform = 'scale(0)';
+                        ripple.style.left = `${x}px`;
+                        ripple.style.top = `${y}px`;
+                        ripple.style.animation = 'ripple 0.8s ease-out forwards';
+                        
+                        submitBtn.appendChild(ripple);
+                        
+                        setTimeout(() => {
+                            ripple.remove();
+                        }, 800);
+                    });
+                }
+            }
+            
+            // Improved gallery hover effects
+            document.querySelectorAll('.gallery-item').forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    // Scale up the hovered item
+                    this.style.transform = 'translateY(-15px) scale(1.05)';
+                    this.style.zIndex = '10';
+                    this.style.boxShadow = '0 25px 50px rgba(0, 94, 184, 0.3)';
+                    
+                    // Add a glow effect
+                    this.style.filter = 'brightness(1.1)';
+                    
+                    // Dim other items
+                    document.querySelectorAll('.gallery-item').forEach(otherItem => {
+                        if (otherItem !== this) {
+                            otherItem.style.opacity = '0.5';
+                            otherItem.style.transform = 'scale(0.95)';
+                            otherItem.style.filter = 'blur(2px) grayscale(30%)';
+                        }
+                    });
+                    
+                    // Show overlay immediately
+                    const overlay = this.querySelector('.gallery-item-overlay');
+                    if (overlay) {
+                        overlay.style.transform = 'translateY(0)';
+                    }
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    // Restore this item
+                    this.style.transform = '';
+                    this.style.zIndex = '';
+                    this.style.boxShadow = '';
+                    this.style.filter = '';
+                    
+                    // Restore other items
+                    document.querySelectorAll('.gallery-item').forEach(otherItem => {
+                        otherItem.style.opacity = '1';
+                        otherItem.style.transform = '';
+                        otherItem.style.filter = '';
+                    });
+                    
+                    // Hide overlay with delay
+                    const overlay = this.querySelector('.gallery-item-overlay');
+                    if (overlay) {
+                        overlay.style.transform = 'translateY(100%)';
+                    }
+                });
+            });
+        });
+        
+        // Helper function to create a floating particle
+        function createParticle(container) {
+            const particle = document.createElement('div');
+            const size = Math.random() * 15 + 5;
+            
+            // Style the particle
+            particle.style.position = 'absolute';
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            particle.style.background = 'rgba(255, 255, 255, 0.3)';
+            particle.style.borderRadius = '50%';
+            particle.style.pointerEvents = 'none';
+            
+            // Position randomly
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Animation properties
+            const duration = Math.random() * 20 + 10;
+            const delay = Math.random() * 5;
+            
+            particle.style.animation = `float-${container.children.length} ${duration}s ease-in-out ${delay}s infinite`;
+            
+            // Add unique motion by setting different keyframes for each particle
+            const keyframes = `
+                @keyframes float-${container.children.length} {
+                    0% {
+                        transform: translate(0, 0) rotate(0deg);
+                        opacity: ${Math.random() * 0.5 + 0.2};
+                    }
+                    25% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg);
+                        opacity: ${Math.random() * 0.5 + 0.5};
+                    }
+                    50% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg);
+                        opacity: ${Math.random() * 0.5 + 0.2};
+                    }
+                    75% {
+                        transform: translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px) rotate(${Math.random() * 360}deg);
+                        opacity: ${Math.random() * 0.5 + 0.5};
+                    }
+                    100% {
+                        transform: translate(0, 0) rotate(0deg);
+                        opacity: ${Math.random() * 0.5 + 0.2};
+                    }
+                }
+            `;
+            
+            // Add keyframes to document
+            const style = document.createElement('style');
+            style.textContent = keyframes;
+            document.head.appendChild(style);
+            
+            // Use the specific animation
+            particle.style.animation = `float-${container.children.length} ${duration}s ease-in-out ${delay}s infinite`;
+            
+            // Add to container
+            container.appendChild(particle);
+        }
+        
+        // Add ripple effect keyframe animation
+        const rippleKeyframes = `
+            @keyframes ripple {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(300);
+                    opacity: 0;
+                }
+            }
+        `;
+        const rippleStyle = document.createElement('style');
+        rippleStyle.textContent = rippleKeyframes;
+        document.head.appendChild(rippleStyle);
+
+        // Adjust particle count for mobile devices
+        function getParticleCount() {
+            return window.innerWidth < 768 ? 15 : 50;
+        }
+        
+        // Fix iOS hover issues for gallery items using touch events
+        document.addEventListener('DOMContentLoaded', function() {
+            // Detect if device is iOS
+            const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+            
+            if (isIOS) {
+                // Apply iOS-specific fixes
+                document.querySelectorAll('.gallery-item').forEach(item => {
+                    item.addEventListener('touchstart', function() {
+                        // Reset all other items first
+                        document.querySelectorAll('.gallery-item').forEach(otherItem => {
+                            if (otherItem !== this) {
+                                otherItem.classList.remove('ios-active');
+                                const otherOverlay = otherItem.querySelector('.gallery-item-overlay');
+                                if (otherOverlay) {
+                                    otherOverlay.style.transform = 'translateY(100%)';
+                                }
+                            }
+                        });
+                        
+                        // Toggle active state for this item
+                        this.classList.toggle('ios-active');
+                        
+                        const overlay = this.querySelector('.gallery-item-overlay');
+                        if (overlay) {
+                            if (this.classList.contains('ios-active')) {
+                                overlay.style.transform = 'translateY(0)';
+                            } else {
+                                overlay.style.transform = 'translateY(100%)';
+                            }
+                        }
+                    });
+                });
+                
+                // Add iOS-specific styles
+                const iosStyle = document.createElement('style');
+                iosStyle.textContent = `
+                    .gallery-item.ios-active {
+                        transform: translateY(-10px) !important;
+                        z-index: 10 !important;
+                        box-shadow: 0 20px 40px rgba(0,94,184,0.25) !important;
+                    }
+                    
+                    /* Fix for iOS fixed position issues */
+                    header {
+                        position: -webkit-sticky;
+                        position: sticky;
+                    }
+                    
+                    /* Fix for iOS scrolling */
+                    html, body {
+                        -webkit-overflow-scrolling: touch;
+                    }
+                `;
+                document.head.appendChild(iosStyle);
+            }
+            
+            // Create particles with adjusted count
+            const particleContainer = document.querySelector('.particle-container');
+            if (particleContainer) {
+                // Clear existing particles
+                particleContainer.innerHTML = '';
+                
+                // Create appropriate number of particles based on device
+                for (let i = 0; i < getParticleCount(); i++) {
+                    createParticle(particleContainer);
+                }
+            }
+        });
+    </script>
+</body>
+</html> 
